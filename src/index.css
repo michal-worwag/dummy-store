@@ -23,6 +23,11 @@ body {
   min-height: 100vh;
 }
 
+a.active {
+  color: #747bff;
+  font-weight: bold;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
