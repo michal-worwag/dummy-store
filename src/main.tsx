@@ -10,23 +10,28 @@ import Cart from './pages/cart.tsx';
 import Home from './pages/home.tsx';
 import MainLayout from './layouts/main-layout.tsx';
 import Account from './pages/account.tsx';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter basename='/dummy-store'>
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route path='/' element={<Home />} />
-          <Route path='/products' element={<Products />}>
-            <Route path='/products/:categorySlug' element={<Products />} />
-            <Route path='/products/:productId' element={<SingleProduct />} />
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter basename='/dummy-store'>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path='/' element={<Home />} />
+            <Route path='/products' element={<Products />}>
+              <Route path='/products/:categorySlug' element={<Products />} />
+              <Route path='/products/:productId' element={<SingleProduct />} />
+            </Route>
+            <Route path='/about' element={<About />} />
+            <Route path='/contact' element={<Contact />} />
+            <Route path='/cart' element={<Cart />} />
+            <Route path='/account' element={<Account />} />
           </Route>
-          <Route path='/about' element={<About />} />
-          <Route path='/contact' element={<Contact />} />
-          <Route path='/cart' element={<Cart />} />
-          <Route path='/account' element={<Account />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   </StrictMode>
 );

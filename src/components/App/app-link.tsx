@@ -8,7 +8,6 @@ type AppLinkProps = {
 
 export default function AppLink({ to, children, ...props }: AppLinkProps) {
   const isExternal = to.startsWith('http');
-  console.log(isExternal);
   return isExternal ? (
     <a
       href={to}
