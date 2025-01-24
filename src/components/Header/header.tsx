@@ -11,9 +11,9 @@ export default function Header() {
   return (
     <header className='bg-white shadow-md'>
       <div className='container mx-auto px-4 py-4 flex items-center justify-between'>
-        <a href='/' className='text-2xl font-bold text-blue-600'>
-          My Store
-        </a>
+        <NavLink to='/' className='text-2xl font-bold text-blue-600'>
+          Dummy Store
+        </NavLink>
         <nav className='hidden md:block'>
           <ul className='flex space-x-6'>
             <li>
