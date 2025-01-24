@@ -2,6 +2,7 @@ import { Menu, ShoppingCart, User } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '../ui/button';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '../ui/sheet';
+import { NavLink } from 'react-router';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,52 +17,52 @@ export default function Header() {
         <nav className='hidden md:block'>
           <ul className='flex space-x-6'>
             <li>
-              <a
-                href='/'
-                className='text-gray-600 hover:text-blue-600 transition-colors'
+              <NavLink
+                to='/'
+                className='text-gray-600 hover:text-blue-600 transition-color'
               >
                 Home
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a
-                href='/products'
+              <NavLink
+                to='/products'
                 className='text-gray-600 hover:text-blue-600 transition-colors'
               >
                 Products
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a
-                href='/about'
+              <NavLink
+                to='/about'
                 className='text-gray-600 hover:text-blue-600 transition-colors'
               >
                 About
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a
-                href='/contact'
+              <NavLink
+                to='/contact'
                 className='text-gray-600 hover:text-blue-600 transition-colors'
               >
                 Contact
-              </a>
+              </NavLink>
             </li>
           </ul>
         </nav>
         <div className='flex items-center space-x-4'>
-          <a
-            href='/cart'
+          <NavLink
+            to='/cart'
             className='text-gray-600 hover:text-blue-600 transition-colors'
           >
             <ShoppingCart className='h-6 w-6' />
-          </a>
-          <a
-            href='/account'
+          </NavLink>
+          <NavLink
+            to='/account'
             className='text-gray-600 hover:text-blue-600 transition-colors'
           >
             <User className='h-6 w-6' />
-          </a>
+          </NavLink>
           <Sheet>
             <SheetTrigger asChild>
               <Button
