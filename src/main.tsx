@@ -13,7 +13,7 @@ import Account from './pages/account.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename='/dummy-store'>
       <Routes>
         <Route element={<MainLayout />}>
           <Route path='/' element={<Home />} />
