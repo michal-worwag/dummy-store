@@ -1,6 +1,7 @@
 import Container from '@/layouts/container';
 import background from '@/assets/images/hero-bg.webp';
 import AppLink from '../App/app-link';
+import { Button } from '../ui/button';
 
 export default function Hero() {
   return (
@@ -19,11 +20,8 @@ export default function Hero() {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
             quos.
           </p>
-          <AppLink
-            to='/products'
-            className='mt-4 bg-white text-black px-4 py-2 rounded-md transition-colors'
-          >
-            View Products
+          <AppLink to='/products'>
+            <Button className='mt-4'>View Products</Button>
           </AppLink>
         </div>
       </Container>
