@@ -1,12 +1,19 @@
 import { PartialProduct } from '@/hooks/useProducts';
 import { Card, CardContent, CardFooter } from '../ui/card';
 import { Button } from '../ui/button';
+import { addToCart } from '@/features/cart/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 export default function ProductListItem({
   product,
 }: {
   product: PartialProduct;
 }) {
+  const { cartItems } = useSelector((store: RootState) => store.cart);
+  const dispatch = useDispatch();
+
+  const isInCart = cartItems.some((item) => item.id === product.id);
   return (
     <Card className='overflow-hidden flex flex-col justify-between'>
       <CardContent className='p-0 '>
@@ -22,7 +29,13 @@ export default function ProductListItem({
         </div>
       </CardContent>
       <CardFooter className='p-4'>
-        <Button className='w-full'>Add to Cart</Button>
+        <Button
+          className='w-full'
+          onClick={() => dispatch(addToCart(product))}
+          disabled={isInCart}
+        >
+          {isInCart ? 'In Cart' : 'Add to Cart'}
+        </Button>
       </CardFooter>
     </Card>
   );

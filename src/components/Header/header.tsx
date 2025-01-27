@@ -3,11 +3,13 @@ import { useState } from 'react';
 import { Button } from '../ui/button';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '../ui/sheet';
 import { NavLink } from 'react-router';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
-
+  const { amount } = useSelector((store: RootState) => store.cart);
   return (
     <header className='bg-white shadow-md'>
       <div className='container mx-auto px-4 py-4 flex items-center justify-between'>
@@ -53,9 +55,12 @@ export default function Header() {
         <div className='flex items-center space-x-4'>
           <NavLink
             to='/cart'
-            className='text-gray-600 hover:text-blue-600 transition-colors'
+            className='text-gray-600 hover:text-blue-600 transition-colors relative'
           >
             <ShoppingCart className='h-6 w-6' />
+            <span className='text-xs absolute -top-2 -right-2 bg-blue-600 text-white rounded-full w-5 h-5 flex items-center justify-center'>
+              {amount > 9 ? '9+' : amount}
+            </span>
           </NavLink>
           <NavLink
             to='/account'
