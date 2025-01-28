@@ -1,7 +1,7 @@
 import { Product } from '@/models/product';
 import { createSlice } from '@reduxjs/toolkit';
 
-export type CartItem = Partial<Product>;
+export type CartItem = Partial<Product & { quantity: number }>;
 
 export interface CartState {
   cartItems: CartItem[];
@@ -20,7 +20,7 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      state.cartItems.push(action.payload);
+      state.cartItems.push({ ...action.payload, quantity: 1 });
     },
     removeFromCart: (state, action) => {
       state.cartItems = state.cartItems.filter(
