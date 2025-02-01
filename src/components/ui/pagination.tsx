@@ -49,12 +49,15 @@ const PaginationLink = ({
 }: PaginationLinkProps) => (
   <Link
     aria-current={isActive ? 'page' : undefined}
+    aria-disabled={isActive}
+    tabIndex={isActive ? -1 : undefined}
     className={cn(
       buttonVariants({
-        variant: isActive ? 'outline' : 'ghost',
+        variant: 'ghost',
         size,
       }),
-      className
+      className,
+      isActive ? 'pointer-events-none text-gray-400' : 'cursor-pointer'
     )}
     {...props}
   />

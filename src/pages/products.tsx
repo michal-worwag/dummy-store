@@ -7,10 +7,10 @@ import { useEffect, useState } from 'react';
 export default function Products() {
   const [skip, setSkip] = useState(0);
   const [searchParams] = useSearchParams();
-  const page = searchParams.get('page') || 1;
+  const page = searchParams.get('page') || 0;
 
   useEffect(() => {
-    const skip = page === '1' ? 0 : Number(page) * 15;
+    const skip = page === '0' ? 0 : Number(page) * 15;
     setSkip(skip);
   }, [page]);
 
