@@ -12,7 +12,6 @@ const AppPagination = ({ total, limit }: { total: number; limit: number }) => {
 
   const currentPage = searchParams.get('page') || 1;
   const totalPages = Math.ceil(total / limit);
-  console.log(totalPages, currentPage);
 
   return (
     <Pagination>
