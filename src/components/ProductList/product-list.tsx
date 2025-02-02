@@ -25,7 +25,7 @@ const ProductList = ({ data, isLoading }: ProductListProps) => {
               <ProductListItem key={product.id} product={product} />
             ))}
       </div>
-      <AppPagination total={data?.total || 0} limit={data?.limit || 0} />
+      <AppPagination total={data?.total || 0} limit={15} />
     </div>
   );
 };
