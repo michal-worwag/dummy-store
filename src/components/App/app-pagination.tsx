@@ -9,25 +9,27 @@ import {
 
 const AppPagination = ({ total, limit }: { total: number; limit: number }) => {
   const [searchParams] = useSearchParams();
-  const currentPage = searchParams.get('page') || 0;
-  const totalPages = Math.ceil(total / limit) - 1;
-  console.log(totalPages);
+
+  const currentPage = searchParams.get('page') || 1;
+  const totalPages = Math.ceil(total / limit);
+  console.log(totalPages, currentPage);
+
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
             to={`/products?page=${Number(currentPage) - 1}`}
-            isActive={Number(currentPage) <= 0}
+            isActive={Number(currentPage) <= 1}
           />
         </PaginationItem>
         <PaginationItem>
-          {Number(currentPage) + 1}/{totalPages}
+          {Number(currentPage)}/{totalPages}
         </PaginationItem>
         <PaginationItem>
           <PaginationNext
             to={`/products?page=${Number(currentPage) + 1}`}
-            isActive={Number(currentPage) + 1 >= totalPages}
+            isActive={Number(currentPage) >= totalPages}
           />
         </PaginationItem>
       </PaginationContent>

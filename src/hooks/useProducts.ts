@@ -27,13 +27,13 @@ type GetProductsParams = {
 async function getProducts(
   params: GetProductsParams
 ): Promise<ProductsResponse> {
-  const { category, limit = 10, skip, sortBy, order, select, delay } = params;
+  const { category, limit = 15, skip, sortBy, order, select, delay } = params;
   const url = category ? `/products/category/${category}` : '/products';
   const response = await instance.get(url, {
     params: {
       limit,
       skip,
-      sort: sortBy,
+      sortBy,
       order,
       select,
       delay,
