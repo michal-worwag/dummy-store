@@ -4,10 +4,14 @@ import ProductList from '@/components/ProductList/product-list';
 import { useSearchParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import ProductSort from '@/components/ProductList/product-sort';
+import ProductFilters from '@/components/ProductList/product-filters';
+import { Button } from '@/components/ui/button';
 export default function Products() {
   const [skip, setSkip] = useState(0);
   const [sortBy, setSortBy] = useState('');
   const [order, setOrder] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -23,6 +27,7 @@ export default function Products() {
   }, [page]);
 
   const { data, isLoading, error } = useProducts({
+    category: selectedCategory || undefined,
     limit: 15,
     skip,
     select: 'title,id,price,category,stock,thumbnail,images',
@@ -31,24 +36,9 @@ export default function Products() {
   });
 
   const handleSort = (value: string) => {
-    setSearchParams({
-      sortBy: value,
-      order:
-        value === 'lowest'
-          ? 'asc'
-          : value === 'highest'
-          ? 'desc'
-          : value === 'a-z'
-          ? 'asc'
-          : 'desc',
-    });
     if (value === 'default') {
       setSortBy('');
       setOrder('');
-      searchParams.delete('sortBy');
-      searchParams.delete('order');
-      searchParams.delete('page');
-      setSearchParams(searchParams);
     } else if (value === 'lowest') {
       setSortBy('price');
       setOrder('asc');
@@ -64,16 +54,35 @@ export default function Products() {
     }
   };
 
+  const handleCategoryChange = (value: string) => {
+    setSelectedCategory(value);
+  };
+
   return (
     <Container>
       <h1 className='text-2xl font-bold mb-8 mt-10'>Products</h1>
-      <div className='flex flex-col gap-8 py-8'>
+      <div className='flex justify-between items-center gap-4'>
+        <Button
+          variant='outline'
+          className='md:hidden'
+          onClick={() => setIsFiltersOpen(!isFiltersOpen)}
+        >
+          Filters
+        </Button>
         <ProductSort onSort={handleSort} />
-        {error ? (
-          <div>Error fetching products</div>
-        ) : (
-          <ProductList data={data || null} isLoading={isLoading} />
-        )}
+      </div>
+      <div className='grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-8 py-8'>
+        <ProductFilters
+          onCategoryChange={handleCategoryChange}
+          isOpen={isFiltersOpen}
+        />
+        <div className='flex flex-col gap-8'>
+          {error ? (
+            <div>Error fetching products</div>
+          ) : (
+            <ProductList data={data || null} isLoading={isLoading} />
+          )}
+        </div>
       </div>
     </Container>
   );
