@@ -26,7 +26,7 @@ const ProductFilters = ({
   };
 
   return (
-    <aside className={cn('filters', isOpen ? 'block' : 'hidden')}>
+    <aside className={cn('filters', isOpen ? 'block' : 'hidden md:block')}>
       <h2 className='text-lg font-bold mb-4'>Filters</h2>
       {isLoading && <div>Loading...</div>}
       {error && <div>Error loading categories</div>}
