@@ -10,6 +10,7 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
   const { amount } = useSelector((store: RootState) => store.cart);
+  const { username } = useSelector((store: RootState) => store.auth);
 
   return (
     <header className='bg-white shadow-md'>
@@ -28,12 +29,21 @@ export default function Header() {
               {amount > 9 ? '9+' : amount}
             </span>
           </NavLink>
-          <NavLink
-            to='/account'
-            className='text-gray-600 hover:text-blue-600 transition-colors'
-          >
-            <User className='h-6 w-6' />
-          </NavLink>
+          {username ? (
+            <NavLink
+              to='/account'
+              className='text-gray-600 hover:text-blue-600 transition-colors'
+            >
+              <User className='h-6 w-6' />
+            </NavLink>
+          ) : (
+            <NavLink
+              to='/login'
+              className='text-gray-600 hover:text-blue-600 transition-colors'
+            >
+              <User className='h-6 w-6' />
+            </NavLink>
+          )}
           <HeaderMobileNav toggleMenu={toggleMenu} />
         </div>
       </div>
