@@ -1,4 +1,4 @@
-import { useActionState, useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   Card,
   CardContent,
@@ -11,32 +11,22 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Container from '@/layouts/container';
-import { loginAction } from '@/actions/login';
 import { Eye, EyeOff } from 'lucide-react';
+import { useLogin } from '@/hooks/useAuth';
+
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const [showError, setShowError] = useState(false);
-  const [state, formAction, pending] = useActionState(loginAction, {
-    username: '',
-    password: '',
-    success: false,
-    error: null,
-  });
 
-  console.log(state);
+  const { mutate, isPending } = useLogin();
 
-  useEffect(() => {
-    setShowError(true);
-    if (state.error) {
-      const timeout = setTimeout(() => {
-        setShowError(false);
-      }, 3000);
-
-      return () => {
-        clearTimeout(timeout);
-      };
-    }
-  }, [state.error]);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    mutate({
+      username: formData.get('username') as string,
+      password: formData.get('password') as string,
+    });
+  };
 
   return (
     <Container>
@@ -46,16 +36,11 @@ export default function LoginPage() {
             <CardTitle>Login</CardTitle>
             <CardDescription>Login to your account to continue</CardDescription>
           </CardHeader>
-          <form action={formAction}>
+          <form onSubmit={handleSubmit}>
             <CardContent>
               <div>
                 <Label htmlFor='username'>Username</Label>
-                <Input
-                  type='text'
-                  id='username'
-                  name='username'
-                  defaultValue={state.username}
-                />
+                <Input type='text' id='username' name='username' />
               </div>
               <div>
                 <Label htmlFor='password'>Password</Label>
@@ -64,7 +49,6 @@ export default function LoginPage() {
                     type={showPassword ? 'text' : 'password'}
                     id='password'
                     name='password'
-                    defaultValue={state.password}
                   />
                   <Button
                     type='button'
@@ -78,12 +62,9 @@ export default function LoginPage() {
               </div>
             </CardContent>
             <CardFooter className='block'>
-              {showError && (
-                <p className='text-red-500 text-sm mb-2'>{state.error}</p>
-              )}
               <div className='flex justify-beetwen gap-2 w-full'>
-                <Button type='submit' disabled={pending}>
-                  {pending ? 'Logging in...' : 'Login'}
+                <Button type='submit' disabled={isPending}>
+                  {isPending ? 'Logging in...' : 'Login'}
                 </Button>
                 <Button variant='outline'>Register</Button>
               </div>

@@ -5,6 +5,7 @@ export interface AuthState {
   email: string;
   accessToken: string;
   refreshToken: string;
+  isAuthenticated: boolean;
 }
 
 const initialState: AuthState = {
@@ -12,27 +13,34 @@ const initialState: AuthState = {
   email: '',
   accessToken: '',
   refreshToken: '',
+  isAuthenticated: false,
 };
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    login: (state, action) => {
+    loginUser: (state, action) => {
       state.username = action.payload.username;
       state.email = action.payload.email;
       state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
+      state.isAuthenticated = true;
     },
-    logout: (state) => {
+    logoutUser: (state) => {
       state.username = '';
       state.email = '';
       state.accessToken = '';
       state.refreshToken = '';
+      state.isAuthenticated = false;
+    },
+    setTokens: (state, action) => {
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
     },
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { loginUser, logoutUser, setTokens } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;
