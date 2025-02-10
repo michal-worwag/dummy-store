@@ -1,8 +1,8 @@
-import instance from '@/axios';
+import axiosInstance from '@/axios';
 import { useQuery } from '@tanstack/react-query';
 
 async function getCategories() {
-  const response = await instance.get('/products/category-list');
+  const response = await axiosInstance.get('/products/category-list');
   return response.data;
 }
 

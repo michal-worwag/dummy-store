@@ -13,6 +13,7 @@ import Account from './pages/account.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { store } from './store.ts';
 import { Provider } from 'react-redux';
+import Login from './pages/login.tsx';
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ createRoot(document.getElementById('root')!).render(
               <Route path='/contact' element={<Contact />} />
               <Route path='/cart' element={<Cart />} />
               <Route path='/account' element={<Account />} />
+              <Route path='/login' element={<Login />} />
             </Route>
           </Routes>
         </BrowserRouter>

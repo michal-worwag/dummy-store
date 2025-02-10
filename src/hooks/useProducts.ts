@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import instance from '@/axios';
+import axiosInstance from '@/axios';
 import { Product } from '@/models/product';
 
 export type PartialProduct = Pick<
@@ -29,7 +29,7 @@ async function getProducts(
 ): Promise<ProductsResponse> {
   const { category, limit = 15, skip, sortBy, order, select, delay } = params;
   const url = category ? `/products/category/${category}` : '/products';
-  const response = await instance.get(url, {
+  const response = await axiosInstance.get(url, {
     params: {
       limit,
       skip,
