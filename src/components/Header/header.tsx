@@ -31,7 +31,7 @@ export default function Header() {
           </NavLink>
           {username ? (
             <NavLink
-              to='/account'
+              to='/dashboard'
               className='text-gray-600 hover:text-blue-600 transition-colors'
             >
               <User className='h-6 w-6' />
