@@ -1,14 +1,21 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import Container from '@/layouts/container';
-import { Link, Outlet } from 'react-router';
+import { Link } from 'react-router';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '@/features/auth/authSlice';
+import TabContent from '@/components/Dashboard/tab-content';
+
 export default function Dashboard() {
+  const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   if (!isAuthenticated) {
     window.location.href = '/dummy-store/login';
     return null;
   }
+
   return (
     <Container>
       <div className='py-8'>
@@ -25,15 +32,25 @@ export default function Dashboard() {
             </TabsTrigger>
           </TabsList>
           <TabsContent value='orders'>
-            <Outlet />
+            <TabContent title='Orders' />
           </TabsContent>
           <TabsContent value='profile'>
-            <Outlet />
+            <TabContent title='Profile' />
           </TabsContent>
           <TabsContent value='addresses'>
-            <Outlet />
+            <TabContent title='Addresses' />
           </TabsContent>
         </Tabs>
+        <div className='flex-1 justify-end mt-4'>
+          <Button
+            variant='outline'
+            onClick={() => {
+              dispatch(logoutUser());
+            }}
+          >
+            Logout
+          </Button>
+        </div>
       </div>
     </Container>
   );

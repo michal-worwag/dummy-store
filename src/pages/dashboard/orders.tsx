@@ -1,4 +1,20 @@
+import { useOrders } from '@/hooks/useOrders';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
+
 const Orders = () => {
+  const { accessToken, id } = useSelector((state: RootState) => state.auth);
+  const { data, isLoading, error } = useOrders(
+    {
+      userId: id,
+      limit: 10,
+      skip: 0,
+      sortBy: 'createdAt',
+      order: 'desc',
+    },
+    accessToken
+  );
+  console.log(data);
   return (
     <div className='py-8'>
       <h1 className='text-2xl font-bold'>Orders</h1>
