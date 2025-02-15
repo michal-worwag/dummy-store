@@ -15,7 +15,6 @@ const Orders = () => {
     },
     accessToken
   );
-  console.log(data);
   return (
     <div className='py-8'>
       {isLoading && <div>Loading...</div>}
