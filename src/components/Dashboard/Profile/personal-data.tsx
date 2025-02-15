@@ -49,54 +49,90 @@ const PersonalData = ({ user }: PersonalDataProps) => {
       <form onSubmit={handleSubmit}>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
           <div>
-            <Label>First Name</Label>
-            <Input type='text' name='firstName' defaultValue={user.firstName} />
-          </div>
-          <div>
-            <Label>Last Name</Label>
-            <Input type='text' name='lastName' defaultValue={user.lastName} />
-          </div>
-          <div>
-            <Label>Email</Label>
-            <Input type='email' name='email' defaultValue={user.email} />
-          </div>
-          <div>
-            <Label>Phone</Label>
-            <Input type='text' name='phone' defaultValue={user.phone} />
-          </div>
-          <div>
-            <Label>Address</Label>
+            <Label htmlFor='firstName'>First Name</Label>
             <Input
               type='text'
+              id='firstName'
+              name='firstName'
+              autoComplete='given-name'
+              defaultValue={user.firstName}
+            />
+          </div>
+          <div>
+            <Label htmlFor='lastName'>Last Name</Label>
+            <Input
+              type='text'
+              id='lastName'
+              name='lastName'
+              autoComplete='family-name'
+              defaultValue={user.lastName}
+            />
+          </div>
+          <div>
+            <Label htmlFor='email'>Email</Label>
+            <Input
+              type='email'
+              id='email'
+              name='email'
+              autoComplete='email'
+              defaultValue={user.email}
+            />
+          </div>
+          <div>
+            <Label htmlFor='phone'>Phone</Label>
+            <Input
+              type='text'
+              id='phone'
+              name='phone'
+              autoComplete='tel'
+              defaultValue={user.phone}
+            />
+          </div>
+          <div>
+            <Label htmlFor='address'>Address</Label>
+            <Input
+              type='text'
+              id='address'
               name='address'
+              autoComplete='address-line1'
               defaultValue={user.address?.address}
             />
           </div>
           <div>
-            <Label>City</Label>
-            <Input type='text' name='city' defaultValue={user.address?.city} />
-          </div>
-          <div>
-            <Label>State</Label>
+            <Label htmlFor='city'>City</Label>
             <Input
               type='text'
+              id='city'
+              name='city'
+              defaultValue={user.address?.city}
+            />
+          </div>
+          <div>
+            <Label htmlFor='state'>State</Label>
+            <Input
+              type='text'
+              id='state'
               name='state'
               defaultValue={user.address?.state}
             />
           </div>
           <div>
-            <Label>Postal Code</Label>
+            <Label htmlFor='postalCode'>Postal Code</Label>
             <Input
               type='text'
+              id='postalCode'
               name='postalCode'
+              autoComplete='postal-code'
               defaultValue={user.address?.postalCode}
             />
           </div>
           <div>
-            <Label>Country</Label>
+            <Label htmlFor='country'>Country</Label>
             <Input
               type='text'
+              id='country'
               name='country'
+              autoComplete='country-name'
               defaultValue={user.address?.country}
             />
           </div>
