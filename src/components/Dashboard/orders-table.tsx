@@ -22,7 +22,6 @@ const columns: ColumnDef<Order>[] = [
 ];
 
 const OrdersTable = ({ data }: { data: Order[] }) => {
-  console.log(data);
   return <DataTable columns={columns} data={data} />;
 };
 
